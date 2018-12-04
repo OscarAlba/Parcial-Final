@@ -5,6 +5,8 @@
  */
 package temperature.parcialFinal.bean;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +31,17 @@ public class ControllerAPITemperature {
     
     @RequestMapping(method = RequestMethod.GET, path = "CelsiusTofahrenheit/{celsius}")
     public ResponseEntity<?> getCtoF(@PathVariable int celsius) {
-   
-        return new ResponseEntity<>(temperature.getCtoF(celsius),HttpStatus.OK);   
+        Map<String, Integer> number = new HashMap<>();
+        number.put("Celsius", celsius);
+        number.put("Fahrenheit", temperature.getCtoF(celsius));
+        return new ResponseEntity<>(number,HttpStatus.OK);   
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "FahrenheitToCelsius/{fahrenheit}")
     public ResponseEntity<?> getFtoC(@PathVariable int fahrenheit) {
-        return new ResponseEntity<>(temperature.getFtoC(fahrenheit),HttpStatus.OK);   
+        Map<String, Integer> number = new HashMap<>();
+        number.put("Fahrenheit", fahrenheit);
+        number.put("Celsius", temperature.getFtoC(fahrenheit));
+        return new ResponseEntity<>(number, HttpStatus.OK);   
     }
 }
