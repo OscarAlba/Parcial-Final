@@ -2,30 +2,30 @@
 
 /* global getTemperature, axios */
 
-var RestControllerModule = (function (){
-    
-    var getCelsiusTofahrenheit = function (id, callback){
-        axios.get('temperature/CelsiusTofahrenheit/'+id)
-            .then(function (consult){
-                callback.onSuccess(consult.data);
+function celsius(id) {
+    axios.get('temperature/CelsiusTofahrenheit/' + id)
+            .then(function (result) {
+                $("#texto").text(result.data.Celsius+"°C es igual a "+result.data.Fahrenheit+ "°F");
             })
-            .catch(function (error){
-                callback.onFailed(error);
+            .catch(function (error) {
+                errorMessage();
+                console.log(error);
             });
-    };
-    
-    var getfahrenheitToCelsius = function (id, callback){
-        axios.get('temperature/FahrenheitToCelsius/'+id)
-            .then(function (consult){
-                callback.onSuccess(consult.data);
+
+}
+
+function fahrenheit(id) {
+    axios.get('temperature/FahrenheitToCelsius/' + id)
+            .then(function (result) {
+                $("#texto").text(result.data.Fahrenheit+"°F es igual a "+result.data.Celsius+" °C");
             })
-            .catch(function (error){
-                callback.onFailed(error);
+            .catch(function (error) {
+                errorMessage();
+                console.log(error);
             });
-    };
-    
-    return {
-        getCelsiusTofahrenheit: getCelsiusTofahrenheit,
-        getfahrenheitToCelsius: getfahrenheitToCelsius
-    };
-})();
+}
+
+function errorMessage() {
+    alert("There is a problem with our servers. We apologize for the inconvince, please try again later");
+}
+ 
