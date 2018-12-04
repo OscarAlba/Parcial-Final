@@ -5,12 +5,14 @@
  */
 package temperature.parcialFinal.bean.services.impl;
 
+import org.springframework.stereotype.Service;
 import temperature.parcialFinal.persistence.TemperaturePersistence;
 
 /**
  *
  * @author 2106991
  */
+@Service
 public class TemperatureChange implements TemperaturePersistence{
     
     
